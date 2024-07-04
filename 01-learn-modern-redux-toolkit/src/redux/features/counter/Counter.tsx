@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useAppDispatch, useAppSelector } from "../../hooks";
+import { useAppDispatch, useAppSelector } from "./../../hooks";
 import { counterActions } from "./counterSlice";
 
 export default function Counter() {

@@ -1,9 +1,9 @@
-import Counter from "./app/features/counter/Counter";
+import Counter from "./redux/features/counter/Counter";
 
 export default function App() {
   return (
-    <div className="App">
+    <main className="App">
       <Counter />
-    </div>
+    </main>
   );
 }
