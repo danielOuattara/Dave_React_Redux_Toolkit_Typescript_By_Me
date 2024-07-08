@@ -9,7 +9,7 @@ const reactionEmoji: Record<ReactionType, string> = {
   coffee: "☕",
 };
 
-export default function PostButtonsReaction(post: Post) {
+export default function PostButtonsReaction({ post }: { post: Post }) {
   const dispatch = useAppDispatch();
   return (
     <div>

@@ -1,5 +1,6 @@
 import { useAppSelector } from "./../../hooks";
 import PostAuthor from "./PostAuthor";
+import PostButtonsReaction from "./PostButtonsReaction";
 import TimeAgo from "./TimeAgo";
 
 export default function PostList() {
@@ -18,6 +19,7 @@ export default function PostList() {
             <PostAuthor userId={post.userId} />
             <TimeAgo timestamp={post.date} />
           </p>
+          <PostButtonsReaction post={post} />
         </article>
       ))}
     </section>

@@ -1,0 +1,33 @@
+# 02-redux-toolkit-bulletin-board-app
+
+- (00:00) Intro
+- (00:15) Welcome
+- (00:28) Prerequisite knowledge
+- (00:45) Docs and Faster Pace
+- (01:13) Starter Code
+- (02:32) Create the posts slice
+- (03:45) Add postsReducer to the store
+- (04:30) PostsList component
+- (05:58) Create a posts selector
+- (07:29) Import PostsList into App.js
+- (08:34) postAdded reducer function
+- (09:46) Action creator functions are automatically generated
+- (10:12) Immer.js is active in createSlice
+- (11:14) AddPostForm component
+- (13:25) Saving a New Post
+- (17:08) Move state formatting to a prepare callback
+- (20:25) Redux Devtools
+- (22:20) Create a usersSlice
+- (23:36) Import the usersReducer into the store
+- (24:02) Modify the prepare callback in postsSlice
+- (24:30) Modify the AddPostForm component
+- (28:57) PostAuthor component
+- (30:28) Import PostAuthor into PostsList
+- (32:25) Install date-fns dependency
+- (33:10) Handling date data in postsSlice
+- (34:55) TimeAgo component
+- (36:18) Import TimeAgo into PostsList
+- (37:29) Display most recent post first
+- (39:02) Adding reaction data to the postsSlice
+- (41:30) ReactionButtons component
+- (43:39) Import ReactionButtons into PostsList
