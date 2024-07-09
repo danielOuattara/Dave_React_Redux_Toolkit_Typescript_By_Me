@@ -29,9 +29,9 @@ export default function AddPostForm() {
         dispatch(
           addNewPost({ title, body, userId: parseInt(userId, 10) }),
         ).unwrap();
-        // setTitle("");
-        // setBody("");
-        // setUserId("");
+        setTitle("");
+        setBody("");
+        setUserId("");
       } catch (error) {
         console.error("Failed to save the post: ", error);
       } finally {

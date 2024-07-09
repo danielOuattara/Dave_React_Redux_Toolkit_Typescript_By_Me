@@ -6,8 +6,10 @@ import { Provider } from "react-redux";
 import store from "./store";
 
 import { fetchUsers } from "./features/user/userExtraActions";
+import { fetchPosts } from "./features/post/postExtraActions";
 
 store.dispatch(fetchUsers());
+store.dispatch(fetchPosts());
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement,

@@ -3,6 +3,7 @@ import AddPostForm from "./features/post/AddPostForm";
 import PostList from "./features/post/PostList";
 import Layout from "./components/Layout";
 import PostPage from "./features/post/PostPage";
+import EditPostForm from "./features/post/EditPostForm";
 
 const router = createBrowserRouter([
   {
@@ -15,6 +16,7 @@ const router = createBrowserRouter([
         children: [
           { index: true, element: <AddPostForm /> },
           { path: ":postId", element: <PostPage /> },
+          { path: "edit/:postId", element: <EditPostForm /> },
         ],
       },
     ],

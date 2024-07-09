@@ -14,3 +14,21 @@ interface IPostInitialState {
   status: "idle" | "loading" | "succeeded" | "failed";
   error: string | null;
 }
+
+interface ICreatePost {
+  title: string;
+  body: string;
+  userId: number;
+}
+
+interface IUpdatePost {
+  id: string;
+  title: string;
+  body: string;
+  userId: number;
+  reactions: Record<ReactionType, number>;
+}
+
+interface IDeletePost {
+  id: number;
+}

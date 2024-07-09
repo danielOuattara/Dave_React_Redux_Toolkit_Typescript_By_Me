@@ -112,16 +112,27 @@ const postSlice = createSlice({
         const posts = state.posts.filter((post) => post.id !== id);
         state.posts = [...posts, action.payload];
       })
-      .addCase(deletePost.fulfilled, (state, action: PayloadAction<Post>) => {
-        if (!action.payload?.id) {
-          console.log("Update could not complete");
-          console.log(action.payload);
-          return;
-        }
-        const { id } = action.payload;
-        const posts = state.posts.filter((post) => post.id !== id);
-        state.posts = [...posts];
-      });
+      // .addCase(
+      //   deletePost.fulfilled,
+      //   (state, action: PayloadAction<IDeletePost>) => {
+      //     if (!action.payload?.id) {
+      //       console.log("Update could not complete");
+      //       console.log(action.payload);
+      //       return;
+      //     }
+      //     const posts = state.posts.filter(
+      //       (post) => post.id !== action.payload.id.toString(),
+      //     );
+      //     state.posts = posts;
+      //   },
+      // );
+      .addCase(
+        deletePost.fulfilled,
+        (state, action: PayloadAction<IDeletePost>) => {
+          const { id } = action.payload;
+          state.posts = state.posts.filter((post) => post.id !== id.toString());
+        },
+      );
   },
 });
 

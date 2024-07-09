@@ -16,9 +16,9 @@ export default function EditPostForm() {
     return state.users;
   });
 
-  const [title, setTitle] = useState(post?.title);
-  const [body, setBody] = useState(post?.body);
-  const [userId, setUserId] = useState(post?.userId);
+  const [title, setTitle] = useState(post?.title ?? "");
+  const [body, setBody] = useState(post?.body ?? "");
+  const [userId, setUserId] = useState(post?.userId ?? "");
   const [requestStatus, setRequestStatus] = useState("idle");
 
   if (!post) {
@@ -48,7 +48,7 @@ export default function EditPostForm() {
             id: post.id,
             title,
             body: body,
-            userId,
+            userId: parseInt(userId, 10),
             reactions: post.reactions,
           }),
         ).unwrap();
@@ -68,8 +68,7 @@ export default function EditPostForm() {
   const submitDeletePost = () => {
     try {
       setRequestStatus("pending");
-      dispatch(deletePost({ id: post.id })).unwrap();
-
+      dispatch(deletePost(parseInt(post.id, 10))).unwrap();
       setTitle("");
       setBody("");
       setUserId("");

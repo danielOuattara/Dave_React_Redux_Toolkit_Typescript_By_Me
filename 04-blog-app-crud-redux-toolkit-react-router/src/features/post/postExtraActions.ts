@@ -1,7 +1,7 @@
 import { createAction, createAsyncThunk, nanoid } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const POST_URL = "https://jsonplaceholder.typicode.com/posts?_limit=21";
+const POST_URL = "https://jsonplaceholder.typicode.com/posts";
 
 export const addPost = createAction(
   "post/addPost",
@@ -38,15 +38,9 @@ export const fetchPosts = createAsyncThunk(
 
 //-------
 
-interface IPostData {
-  title: string;
-  body: string;
-  userId: number;
-}
-
 export const addNewPost = createAsyncThunk(
   "posts/addNewPost",
-  async (data: IPostData, _thunkAPI) => {
+  async (data: ICreatePost, _thunkAPI) => {
     console.log("data = ** ", data);
     try {
       const res = await axios.post(POST_URL, data);
@@ -65,15 +59,9 @@ export const addNewPost = createAsyncThunk(
 
 //----------
 
-interface IUpdateData {
-  id: string;
-  title: string;
-  body: string;
-  userId: number;
-}
 export const updatePost = createAsyncThunk(
   "posts/updatePost",
-  async (data: IUpdateData, _thunkAPI) => {
+  async (data: IUpdatePost, _thunkAPI) => {
     try {
       const { id } = data;
       const res = await axios.put(`${POST_URL}/${id}`, data);
@@ -91,30 +79,48 @@ export const updatePost = createAsyncThunk(
 );
 
 //----------
-interface IDeleteData {
-  id: string;
-  title: string;
-  body: string;
-  userId: number;
-}
-export const deletePost = createAsyncThunk(
+
+// export const deletePost = createAsyncThunk(
+//   "posts/deletePost",
+//   async (data: Post, _thunkAPI) => {
+//     console.log("data = ", data);
+//     try {
+//       const { id } = data;
+//       const res = await axios.delete(`${POST_URL}/${id}`);
+//       if (res.status === 200) {
+//         return { id };
+//       } else {
+//         return `${res.status}: ${res.statusText}`;
+//       }
+//     } catch (error) {
+//       if (axios.isAxiosError(error) && error.response) {
+//         return Promise.reject(new Error(error.response.data.message));
+//       } else if (error instanceof Error) {
+//         return Promise.reject(new Error(error.message));
+//       } else {
+//         return Promise.reject(new Error("An unknown error occurred"));
+//       }
+//     }
+//   },
+// );
+
+export const deletePost = createAsyncThunk<IDeletePost, number>(
   "posts/deletePost",
-  async (data: IDeleteData, _thunkAPI) => {
+  async (postId, { rejectWithValue }) => {
     try {
-      const { id } = data;
-      const res = await axios.delete(`${POST_URL}/${id}`);
-      if (res?.status === 200) {
-        return data;
+      const res = await axios.delete(`${POST_URL}/${postId}`);
+      if (res.status === 200) {
+        return { id: postId };
       } else {
-        return `${res?.status}: ${res?.statusText}`;
+        return rejectWithValue(`${res.status}: ${res.statusText}`);
       }
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
-        return Promise.reject(new Error(error.response.data.message));
+        return rejectWithValue(error.response.data.message);
       } else if (error instanceof Error) {
-        return Promise.reject(new Error(error.message));
+        return rejectWithValue(error.message);
       } else {
-        return Promise.reject(new Error("An unknown error occurred"));
+        return rejectWithValue("An unknown error occurred");
       }
     }
   },
